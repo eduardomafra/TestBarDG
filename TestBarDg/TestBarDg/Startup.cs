@@ -29,7 +29,7 @@ namespace TestBarDg
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<BarDGContext>(opt => opt.UseSqlServer
+            services.AddDbContext<BarDGContext>(opt => opt.UseSqlite
                 (Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllers().AddNewtonsoftJson(s => {
