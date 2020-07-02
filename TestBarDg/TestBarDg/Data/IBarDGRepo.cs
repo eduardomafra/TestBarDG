@@ -14,12 +14,17 @@ namespace TestBarDg.Data
 
         IEnumerable<Comanda> GetAllComandas();
         Comanda GetComandaById(int id);
+        void inserirComanda(Comanda comanda);
         void updateComanda(Comanda comanda);
 
         IEnumerable<ComandaItens> GetAllComandaItens();
+        IEnumerable<ComandaItens> GetAllComandaItensByComanda(int idComanda);
         ComandaItens GetComandaItensById(int id);
         ComandaItens GetComandaItensByComanda(int id);
         void inserirItemComanda(ComandaItens comandaItens);
         void DeletarItensComanda(ComandaItens comandaItens);
+        IEnumerable<Venda> GetAllVendas();
+        Venda GetVendaById(int id);
+        void FecharComanda(Venda venda);
     }
 }

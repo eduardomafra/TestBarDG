@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TestBarDg.Data;
 using TestBarDg.DTOs;
+using TestBarDg.Models;
 
 namespace TestBarDg.Controllers
 {
@@ -32,7 +33,7 @@ namespace TestBarDg.Controllers
             return Ok(_mapper.Map<IEnumerable<ComandaReadDTO>>(comandas));
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetComandaById")]
         public ActionResult<ComandaReadDTO> GetComandaById(int id)
         {
             var comanda = _repository.GetComandaById(id);
@@ -42,6 +43,19 @@ namespace TestBarDg.Controllers
                 return Ok(_mapper.Map<ComandaReadDTO>(comanda));
             }
             return NotFound();
+
+        }
+
+        [HttpPost]
+        public ActionResult<ComandaItensReadDTO> inserirComanda(ComandaCreateDTO comandaCreateDto)
+        {
+            var comandaModel = _mapper.Map<Comanda>(comandaCreateDto);
+            _repository.inserirComanda(comandaModel);
+            _repository.saveChanges();
+
+            var comandaReadDTO = _mapper.Map<ComandaReadDTO>(comandaModel);
+
+            return CreatedAtRoute(nameof(GetComandaById), new { Id = comandaReadDTO.Id }, comandaReadDTO);
 
         }
 

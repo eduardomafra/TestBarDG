@@ -45,7 +45,20 @@ namespace TestBarDg.Controllers
 
         }
 
-        [HttpGet("{id}", Name= "GetComandaItensByComanda")]
+        [HttpGet("comanda/{idComanda}", Name = "GetAllComandaItensByComanda")]
+        public ActionResult<IEnumerable<ComandaItensReadDTO>> GetAllComandaItensByComanda(int idComanda)
+        {
+            var comandaItens = _repository.GetAllComandaItensByComanda(idComanda);
+
+            if (comandaItens != null)
+            {
+                return Ok(_mapper.Map<IEnumerable<ComandaItensReadDTO>>(comandaItens));
+            }
+            return NotFound();
+
+        }
+        /*
+        [HttpGet("comanda/{id}", Name= "GetComandaItensByComanda")]
         public ActionResult<ComandaItensReadDTO> GetComandaItensByComanda(int id)
         {
             var comandaItens = _repository.GetComandaItensByComanda(id);
@@ -56,7 +69,7 @@ namespace TestBarDg.Controllers
             }
             return NotFound();
 
-        }
+        }*/
 
         [HttpPost]
         public ActionResult<ComandaItensReadDTO> inserirItemComanda(ComandaItensCreateDTO comandaItensCreateDto)
@@ -67,7 +80,7 @@ namespace TestBarDg.Controllers
 
             var comandaReadDTO = _mapper.Map<ComandaItensReadDTO>(comandaItensModel);
 
-            return CreatedAtRoute(nameof(GetComandaItensByComanda), new { Id = comandaReadDTO.IdComanda }, comandaReadDTO);
+            return CreatedAtRoute(nameof(GetComandaItensById), new { Id = comandaReadDTO.IdComanda }, comandaReadDTO);
 
         }
 

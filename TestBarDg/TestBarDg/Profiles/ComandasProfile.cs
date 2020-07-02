@@ -15,6 +15,7 @@ namespace TestBarDg.Profiles
             CreateMap<Comanda, ComandaReadDTO>();
             CreateMap<ComandaUpdateDTO, Comanda>();
             CreateMap<Comanda, ComandaUpdateDTO>();
+            CreateMap<ComandaCreateDTO, Comanda>();
         }
     }
 }
