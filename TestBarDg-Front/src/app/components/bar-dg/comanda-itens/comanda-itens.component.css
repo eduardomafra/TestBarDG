@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,700');
+@import url("https://fonts.googleapis.com/css?family=Bebas+Neue");
+
+
+.section-header {
+    font-family: "Bebas Neue";
+    font-weight: normal;
+    color: #333;
+    text-align: center;
+    font-size: 2.5em;
+}
+
+.btn-primary {
+    color: white;
+    background-color: #56CCF2;
+    border: none;
+    border-radius: .3em;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #2D9CDB;
+}
+
+.comanda-header {
+    font-weight: bold;
+    font-size: 1.25em;
+    color: #333;
+}
+
+.comanda-column {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid black;
+    margin-right: 1.5em;
+    padding-bottom: 10px;
+    margin-top: 10px;
+}
+
+.comanda-row {
+    display: flex;
+}
+
+.comanda-item {
+    width: 45%;
+}
+
+.comanda-price {
+    width: 20%;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.comanda-quantity {
+    width: 35%;
+}
+
+.comanda-item-title {
+    color: #333;
+    margin-left: .5em;
+    font-size: 1.2em;
+}
+
+.comanda-item-image {
+    width: 75px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.comanda-quantity-input {
+    height: 34px;
+    width: 50px;
+    border-radius: 5px;
+    border: 1px solid #56CCF2;
+    background-color: #eee;
+    color: #333;
+    padding: 0;
+    text-align: center;
+    font-size: 1.2em;
+    margin-right: 25px;
+}
+
+.comanda-row:last-child {
+    border-bottom: 1px solid black;
+}
+
+.comanda-row:last-child .comanda-column {
+    border: none;
+}
+
+.comanda-total {
+    text-align: end;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.comanda-total-title {
+    font-weight: bold;
+    font-size: 1.5em;
+    color: black;
+    margin-right: 20px;
+}
+
+.comanda-total-price {
+    color: #333;
+    font-size: 1.1em;
+}
+
+.btn-close {
+    display: block;
+    margin: 40px auto 80px auto;
+    font-size: 1.75em;
+}
