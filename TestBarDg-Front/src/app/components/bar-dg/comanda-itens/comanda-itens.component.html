@@ -1,15 +1,6 @@
-<!-- 
-<div class="col-md">
-<ul *ngFor="let item of comandaItemList" [value]="comandaItemList" class="list-group list-group-flush">
-    <li class="list-group-item">Cras justo odio</li>
-    <mat-form-field> 
-        <input type="number" class="form-control" matInput name="value" placeholder="Quantidade" 
-               formControlName="value"></mat-form-field>
-      
-  </ul>
-</div> -->
 
     <h2 class="section-header">COMANDA</h2>
+    <div *ngIf="comandaItemList.length  === 0" class="alert alert-info">Comanda Vazia</div>
     <div class="comanda-row">
         <span class="comanda-item comanda-header comanda-column">ITEM</span>
         <span class="comanda-price comanda-header comanda-column">PREÇO</span>
@@ -18,13 +9,28 @@
     
     <div class="comanda-items comanda-row" *ngFor="let comandaItem of comandaItemList" [value]="comandaItem">
         <div class="comanda-item comanda-column">
-            <img class="comanda-item-image" src="../../../../assets/{{comandaItem.id}}.jpg" width="100" height="100">
-            <span class="comanda-item-title">CERVEJA</span>
+            <img class="comanda-item-image" src="../../../../assets/{{comandaItem.idItem}}.jpg" width="100" height="100">
+            <span class="comanda-item-title">{{comandaItem.idItem}}</span>
         </div>
         <span class="comanda-price comanda-column">{{comandaItem.valorTotal}}</span>
         <div class="comanda-quantity comanda-column">
-            <input class="comanda-quantity-input" type="number" value="1">
-            <button class="btn btn-danger" type="button">REMOVER</button>
+            <div class="example-button-row">
+                <div class="example-flex-container">
+                  <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+              </div>
+            <span class="comanda-quantity-span">{{comandaItem.quantidade}}</span>
+            <div class="example-button-row">
+                <div class="example-flex-container">
+                  <button (click)="removeItem(comandaItem)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                    <mat-icon>remove</mat-icon>
+                  </button>
+                </div>
+              </div>
+            <!-- <input class="comanda-quantity-input" [(ngModel)]="comandaItem.quantidade" (change)="attValor(comandaItem)" type="number" value="{{comandaItem.quantidade}}"> -->
+            <!-- <button class="btn btn-danger" (click)="removeItem(comandaItem)" type="button">REMOVER</button> -->
         </div>
     </div>
 

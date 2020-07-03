@@ -51,6 +51,12 @@
     color: #333;
 }
 
+.comanda-quantity-span{
+    /* width: 20%; */
+    font-size: 1.2em;
+    color: #333;
+}
+
 .comanda-quantity {
     width: 35%;
 }

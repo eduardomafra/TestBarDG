@@ -4,11 +4,11 @@ import { ItemService } from 'src/app/services/item.service';
 import { Item } from 'src/app/models/item';
 
 @Component({
-  selector: 'app-itens',
-  templateUrl: './itens.component.html',
-  styleUrls: ['./itens.component.css']
+  selector: 'app-item-list',
+  templateUrl: './item-list.component.html',
+  styleUrls: ['./item-list.component.css']
 })
-export class ItensComponent implements OnInit {
+export class ItemListComponent implements OnInit {
 
   itemList: Item[] = []
 
