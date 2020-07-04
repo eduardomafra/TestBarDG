@@ -36,7 +36,7 @@ namespace TestBarDg.Data
 
         public IEnumerable<ComandaItens> GetAllComandaItensByComanda(int idComanda)
         {
-            return _context.Comanda_Itens.Where(w => w.IdComanda == idComanda).ToList();
+            return _context.Comanda_Itens.Where(w => w.IdComanda == idComanda).OrderBy(o => o.IdItem).ToList();
         }
 
         public IEnumerable<Comanda> GetAllComandas()
