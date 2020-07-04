@@ -46,7 +46,7 @@ namespace TestBarDg
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCors(
-                options => options.WithOrigins("*").AllowAnyMethod()
+                options => options.WithOrigins("*").AllowAnyMethod().AllowAnyHeader()
             );
 
             if (env.IsDevelopment())

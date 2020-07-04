@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestBarDg.DTOs
 {
-    public class ComandaItensCreateDTO
+    public class ComandaItensUpdateDTO
     {
         [Required]
         public int IdComanda { get; set; }

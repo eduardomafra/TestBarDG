@@ -23,6 +23,7 @@ namespace TestBarDg.Data
         ComandaItens GetComandaItensByComanda(int id);
         void inserirItemComanda(ComandaItens comandaItens);
         void DeletarItensComanda(ComandaItens comandaItens);
+        void updateItensComanda(ComandaItens comandaItens);
         IEnumerable<Venda> GetAllVendas();
         Venda GetVendaById(int id);
         void FecharComanda(Venda venda);

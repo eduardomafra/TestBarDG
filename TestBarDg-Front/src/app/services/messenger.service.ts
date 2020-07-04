@@ -6,16 +6,27 @@ import { Subject } from 'rxjs'
 })
 export class MessengerService {
 
-  subject = new  Subject();
+  itemSubject = new Subject();
+  comandaSubject = new Subject();
 
   constructor() { }
 
-  sendMsg(item){
-    this.subject.next(item)
+  sendItem(item){
+    this.itemSubject.next(item)
+    // console.log(item)
   }
 
-  getMsg(){
-    return this.subject.asObservable()
+  getItem(){
+    return this.itemSubject.asObservable()
+  }
+
+  sendComanda(comanda){
+    this.comandaSubject.next(comanda)
+    // console.log(comanda)
+  }
+
+  getComanda(){
+    return this.comandaSubject.asObservable()
   }
 
 }

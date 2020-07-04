@@ -18,7 +18,7 @@ export class ItemComponent implements OnInit {
 
   handleAddToComanda(){
     // console.log(this.item);
-    this.msg.sendMsg(this.item);
+    this.msg.sendItem(this.item);
   }
 
 }

@@ -1,0 +1,6 @@
+.mat-selection-list{
+    border: solid 1px #DFDFDF;
+    -webkit-background-clip: padding-box; /* for Safari */
+    background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+    border-radius: 10px;
+}

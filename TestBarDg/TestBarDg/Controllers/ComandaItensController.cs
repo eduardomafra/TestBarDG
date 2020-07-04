@@ -99,5 +99,25 @@ namespace TestBarDg.Controllers
             return NoContent();
 
         }
+
+        [HttpPut("{id}")]
+        public ActionResult updateItensComanda(int id, ComandaItensUpdateDTO comandaItensUpdateDTO)
+        {
+            var itensComandaModelFromRepo = _repository.GetComandaItensById(id);
+            if (itensComandaModelFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(comandaItensUpdateDTO, itensComandaModelFromRepo);
+
+            _repository.updateItensComanda(itensComandaModelFromRepo);
+
+            _repository.saveChanges();
+
+            return NoContent();
+
+        }
+
     }
 }

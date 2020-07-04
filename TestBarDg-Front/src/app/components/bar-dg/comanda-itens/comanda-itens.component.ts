@@ -4,6 +4,7 @@ import { ComandaItensService } from 'src/app/services/comanda-itens.service';
 import { ComandaItens } from 'src/app/models/comanda-itens';
 import { MessengerService } from 'src/app/services/messenger.service';
 import { Item } from 'src/app/models/item';
+import { Comanda } from 'src/app/models/comanda';
 
 @Component({
   selector: 'app-comanda-itens',
@@ -14,20 +15,24 @@ export class ComandaItensComponent implements OnInit {
 
   comandaItemList: ComandaItens[] = []
 
-  constructor(private comandaItensService: ComandaItensService, private msg: MessengerService) { }
+  comandaTotal = 0;
+
+  idComanda = 1;
+
+  constructor(private comandaItensService: ComandaItensService, private msg: MessengerService) {   }
 
   ngOnInit() {
 
-    this.msg.getMsg().subscribe((item: Item) => {
-      
+    var self = this;
 
+    this.msg.getItem().subscribe((item: Item) => {
+      console.log(item)
       var verificaItem = false;
 
       this.comandaItemList.forEach(function (itens) {
         if(itens.idItem == item.id){
           verificaItem = true;
-          itens.quantidade += 1;
-          itens.valorTotal = itens.quantidade * itens.valorUnitario;
+          self.addItem(itens);
         }  
       });
       
@@ -35,22 +40,65 @@ export class ComandaItensComponent implements OnInit {
         this.comandaItemList.push({
           id: null,
           idItem: item.id,
-          idComanda: 1,
+          idComanda: this.idComanda,
           quantidade: 1,
           ativo: false,
           valorTotal: item.preco,
           valorUnitario: item.preco
       })
       }
-
-      console.log(this.comandaItemList);
+      this.getTotal();
 
     })
 
-    this.comandaItensService.getComandaItensByComanda(1).subscribe((itens) =>{
-      this.comandaItemList = itens
+    this.msg.getComanda().subscribe((comanda: Comanda) => {
+      this.saveItensComanda();
+      this.idComanda = comanda.id;
+      this.getComandaItensByComanda(comanda.id);
+
     })
     
+    this.getComandaItensByComanda(this.idComanda); 
+    
+  }
+  
+
+  getTotal(){
+    this.comandaTotal = 0;
+    var self = this;
+    this.comandaItemList.forEach(function (item) {
+      self.comandaTotal += (item.quantidade * item.valorUnitario)
+    })
+  }
+
+  fecharComanda(){
+    
+  }
+
+  insertComandaItens(comandaItem: ComandaItens){
+    this.comandaItensService.insertComandaItens(comandaItem).subscribe();
+  }
+
+  updateComandaItens(idComandaItem: number, comandaItem: ComandaItens){
+    this.comandaItensService.updateComandaItens(idComandaItem, comandaItem).subscribe();
+  }
+
+  saveItensComanda(){
+    var self = this;
+    this.comandaItemList.forEach(function (comandaItens){
+      if(comandaItens.id != null){
+        self.updateComandaItens(comandaItens.id, comandaItens);
+      } else {
+        self.insertComandaItens(comandaItens);
+      }
+    });
+  }
+
+  getComandaItensByComanda(idComanda: number){
+    this.comandaItensService.getComandaItensByComanda(idComanda).subscribe((itens) =>{
+      this.comandaItemList = itens;
+      this.getTotal();
+    })
   }
 
   deleteComandaItensById(id: number){
@@ -70,6 +118,13 @@ export class ComandaItensComponent implements OnInit {
           this.comandaItemList.splice(index, 1);
         }       
     }
+    this.getTotal();
+  }
+
+  addItem(item: ComandaItens){
+    item.quantidade += 1;
+    item.valorTotal = item.quantidade * item.valorUnitario;
+    this.getTotal();
   }
 
 }

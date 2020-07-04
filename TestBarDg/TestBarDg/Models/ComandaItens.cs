@@ -25,8 +25,5 @@ namespace TestBarDg.Models
 
         [Required]
         public double ValorTotal { get; set; }
-
-        [Required]
-        public bool Ativo { get; set; }
     }
 }

@@ -24,8 +24,5 @@ namespace TestBarDg.DTOs
 
         [Required]
         public double ValorTotal { get; set; }
-
-        [Required]
-        public bool Ativo { get; set; }
     }
 }

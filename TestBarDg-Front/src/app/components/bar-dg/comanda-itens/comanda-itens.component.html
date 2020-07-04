@@ -16,7 +16,7 @@
         <div class="comanda-quantity comanda-column">
             <div class="example-button-row">
                 <div class="example-flex-container">
-                  <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                  <button (click)="addItem(comandaItem)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
                     <mat-icon>add</mat-icon>
                   </button>
                 </div>
@@ -36,6 +36,6 @@
 
     <div class="comanda-total">
         <strong class="comanda-total-title">Total</strong>
-        <span class="comanda-total-price">$0</span>
+        <span class="comanda-total-price">{{comandaTotal}}</span>
     </div>
-    <button class="btn btn-primary btn-close" type="button">FECHAR COMANDA</button>
+    <button (click)="saveItensComanda()" class="btn btn-primary btn-close" type="button">FECHAR COMANDA</button>

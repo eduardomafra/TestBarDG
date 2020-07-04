@@ -100,6 +100,11 @@ namespace TestBarDg.Data
 
         }
 
+        public void updateItensComanda(ComandaItens comandaItens)
+        {
+            //throw new NotImplementedException();
+        }
+
         public bool saveChanges()
         {
             return (_context.SaveChanges() >= 0);
