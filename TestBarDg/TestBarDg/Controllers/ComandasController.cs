@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Threading.Tasks;
 using TestBarDg.Data;
 using TestBarDg.DTOs;
@@ -63,7 +64,7 @@ namespace TestBarDg.Controllers
         public ActionResult updateComanda(int id, ComandaUpdateDTO comandaUpdateDTO)
         {
             var comandaModelFromRepo = _repository.GetComandaById(id);
-            if(comandaModelFromRepo == null)
+            if (comandaModelFromRepo == null)
             {
                 return NotFound();
             }
@@ -89,7 +90,7 @@ namespace TestBarDg.Controllers
 
             var comandaToPatch = _mapper.Map<ComandaUpdateDTO>(comandaModelFromRepo);
             patchDoc.ApplyTo(comandaToPatch, ModelState);
-            
+
             if (!TryValidateModel(comandaToPatch))
             {
                 return ValidationProblem(ModelState);
@@ -102,6 +103,78 @@ namespace TestBarDg.Controllers
             _repository.saveChanges();
 
             return NoContent();
+        }
+
+        [HttpPost("fechar/{id}")]
+        public ActionResult FecharComanda(int id)
+        {
+            var comandaModelFromRepo = _repository.GetComandaById(id);
+            var comandaItensListFromRepo = _repository.GetAllComandaItensByComanda(id);
+
+            if (comandaModelFromRepo == null || comandaModelFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            var descontos = getDesconto(comandaItensListFromRepo);
+
+            foreach(DescontoCreateDTO desconto in descontos)
+            {
+                InserirDesconto(desconto);
+            }
+
+            comandaModelFromRepo.isClosed = true;
+
+            return updateComanda(comandaModelFromRepo.Id, _mapper.Map<ComandaUpdateDTO>(comandaModelFromRepo));
+        }
+
+        private void InserirDesconto(DescontoCreateDTO desconto)
+        {
+            var descontoModel = _mapper.Map<Desconto>(desconto);
+            _repository.InserirDesconto(descontoModel);
+            _repository.saveChanges();
+        }
+
+        private IEnumerable<DescontoCreateDTO> getDesconto(IEnumerable<ComandaItens> comandaItensList)
+        {
+            List<DescontoCreateDTO> desconto = new List<DescontoCreateDTO>();
+
+            var cerveja = comandaItensList.Where(w => w.nomeItem == "Cerveja").FirstOrDefault();
+            var conhaque = comandaItensList.Where(w => w.nomeItem == "Conhaque").FirstOrDefault();
+            var agua = comandaItensList.Where(w => w.nomeItem == "Água").FirstOrDefault();
+
+            if (cerveja != null)
+            {
+                var quantidadeCerveja = Convert.ToInt32(cerveja.Quantidade / 5);
+
+                if(quantidadeCerveja >= 1)
+                {
+                    desconto.Add(new DescontoCreateDTO(cerveja.IdComanda, cerveja.IdItem, cerveja.nomeItem, quantidadeCerveja, quantidadeCerveja * cerveja.ValorUnitario));
+                }
+
+                if(conhaque != null)
+                {
+                    if(agua != null)
+                    {
+                        quantidadeCerveja = Convert.ToInt32(cerveja.Quantidade / 2);
+                        var quantidadeConhaque = Convert.ToInt32(conhaque.Quantidade / 3);
+
+                        if (quantidadeCerveja >= 1 && quantidadeConhaque >= 1)
+                        {
+                            if (quantidadeCerveja <= quantidadeConhaque)
+                            {
+                                var quantidade = quantidadeCerveja <= agua.Quantidade ? quantidadeCerveja : agua.Quantidade;
+                                desconto.Add(new DescontoCreateDTO(agua.IdComanda, agua.IdItem, agua.nomeItem, quantidade, quantidade * agua.ValorUnitario));
+                            } else
+                            {
+                                var quantidade = quantidadeConhaque <= agua.Quantidade ? quantidadeConhaque : agua.Quantidade;
+                                desconto.Add(new DescontoCreateDTO(agua.IdComanda, agua.IdItem, agua.nomeItem, quantidade, quantidade * agua.ValorUnitario));
+                            }
+                        }
+                    }                   
+                }
+            }
+            return desconto;
         }
 
     }

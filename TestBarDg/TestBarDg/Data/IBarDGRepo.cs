@@ -27,5 +27,6 @@ namespace TestBarDg.Data
         IEnumerable<Venda> GetAllVendas();
         Venda GetVendaById(int id);
         void FecharComanda(Venda venda);
+        void InserirDesconto(Desconto desconto);
     }
 }

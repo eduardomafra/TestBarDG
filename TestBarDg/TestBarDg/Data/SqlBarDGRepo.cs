@@ -114,5 +114,15 @@ namespace TestBarDg.Data
         {
             //throw new NotImplementedException();
         }
+
+        public void InserirDesconto(Desconto desconto)
+        {
+            if (desconto == null)
+            {
+                throw new ArgumentNullException(nameof(desconto));
+            }
+
+            _context.Descontos.Add(desconto);
+        }
     }
 }

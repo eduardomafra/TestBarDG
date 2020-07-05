@@ -3,6 +3,7 @@
       <div class="card-body"><hr>
         <h5 class="card-title">R$ {{item.preco}}</h5>
         <p class="card-text">{{item.descricao}}</p>
-        <a (click)="handleAddToComanda()" class="btn btn-outline-primary btn-md btn-block">Adicionar</a>
+        <a disabled (click)="handleAddToComanda()" class="btn btn-outline-primary btn-md btn-block">Adicionar</a>
+        <button class="btn btn-outline-primary btn-md btn-block">Adicionar</button>
       </div>
     </div>

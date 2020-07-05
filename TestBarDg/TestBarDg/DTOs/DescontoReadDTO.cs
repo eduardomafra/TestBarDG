@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TestBarDg.Models
+namespace TestBarDg.DTOs
 {
-    public class ComandaItens
+    public class DescontoReadDTO
     {
         [Key]
         public int Id { get; set; }
@@ -18,15 +18,12 @@ namespace TestBarDg.Models
         public int IdItem { get; set; }
 
         [Required]
-        public string nomeItem { get; set; }
+        public string NomeItem { get; set; }
 
         [Required]
         public int Quantidade { get; set; }
 
         [Required]
-        public double ValorUnitario { get; set; }
-
-        [Required]
-        public double ValorTotal { get; set; }
+        public double ValorDesconto { get; set; }
     }
 }

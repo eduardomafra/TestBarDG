@@ -15,6 +15,9 @@ namespace TestBarDg.DTOs
         public int IdItem { get; set; }
 
         [Required]
+        public string nomeItem { get; set; }
+
+        [Required]
         public int Quantidade { get; set; }
 
         [Required]

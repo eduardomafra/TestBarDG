@@ -8,6 +8,7 @@ export class MessengerService {
 
   itemSubject = new Subject();
   comandaSubject = new Subject();
+  comandaItensSubject = new Subject();
 
   constructor() { }
 
@@ -27,6 +28,14 @@ export class MessengerService {
 
   getComanda(){
     return this.comandaSubject.asObservable()
+  }
+
+  sendComandaItens(comandaItens){
+    this.comandaItensSubject.next(comandaItens)
+  }
+
+  getComandaItens(){
+    return this.comandaItensSubject.asObservable()
   }
 
 }

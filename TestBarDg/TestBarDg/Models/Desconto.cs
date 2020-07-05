@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace TestBarDg.Models
 {
-    public class ComandaItens
+    public class Desconto
     {
         [Key]
         public int Id { get; set; }
-
+        
         [Required]
         public int IdComanda { get; set; }
 
@@ -18,15 +18,14 @@ namespace TestBarDg.Models
         public int IdItem { get; set; }
 
         [Required]
-        public string nomeItem { get; set; }
+        public string NomeItem { get; set; }
 
         [Required]
         public int Quantidade { get; set; }
 
         [Required]
-        public double ValorUnitario { get; set; }
+        public double ValorDesconto { get; set; }
 
-        [Required]
-        public double ValorTotal { get; set; }
+        
     }
 }

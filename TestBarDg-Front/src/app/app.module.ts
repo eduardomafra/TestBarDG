@@ -18,7 +18,9 @@ import { ItemListComponent } from './components/bar-dg/item-list/item-list.compo
 import { ItemComponent } from './components/bar-dg/item-list/item/item.component';
 import {MatIconModule} from '@angular/material/icon';
 import { ComandaListComponent } from './components/bar-dg/comanda-list/comanda-list.component';
-import { ComandaComponent } from './components/bar-dg/comanda-list/comanda/comanda.component'; 
+import { ComandaComponent } from './components/bar-dg/comanda-list/comanda/comanda.component';
+import { PromocaoComponent } from './components/bar-dg/promocao/promocao.component';
+import { PromocaoParcialComponent } from './components/bar-dg/promocao/promocao-parcial/promocao-parcial.component'; 
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { ComandaComponent } from './components/bar-dg/comanda-list/comanda/coman
     ItemComponent,
     ComandaListComponent,
     ComandaComponent,
+    PromocaoComponent,
+    PromocaoParcialComponent,
   ],
   imports: [
     BrowserModule,

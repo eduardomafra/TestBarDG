@@ -40,6 +40,7 @@ export class ComandaItensComponent implements OnInit {
         this.comandaItemList.push({
           id: null,
           idItem: item.id,
+          nomeItem: item.descricao,
           idComanda: this.idComanda,
           quantidade: 1,
           ativo: false,
@@ -59,7 +60,6 @@ export class ComandaItensComponent implements OnInit {
     })
     
     this.getComandaItensByComanda(this.idComanda); 
-    
   }
   
 
@@ -98,6 +98,7 @@ export class ComandaItensComponent implements OnInit {
     this.comandaItensService.getComandaItensByComanda(idComanda).subscribe((itens) =>{
       this.comandaItemList = itens;
       this.getTotal();
+      this.handleSendComandaItens()
     })
   }
 
@@ -125,6 +126,10 @@ export class ComandaItensComponent implements OnInit {
     item.quantidade += 1;
     item.valorTotal = item.quantidade * item.valorUnitario;
     this.getTotal();
+  }
+
+  handleSendComandaItens(){
+    this.msg.sendComandaItens(this.comandaItemList);
   }
 
 }
