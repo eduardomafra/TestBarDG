@@ -1,6 +1,7 @@
 
     <h2 class="section-header">COMANDA</h2>
     <div *ngIf="comandaItemList.length  === 0" class="alert alert-info">Comanda Vazia</div>
+    <div *ngIf="comanda.isClosed" class="alert alert-danger">Comanda fechada</div>
     <div class="comanda-row">
         <span class="comanda-item comanda-header comanda-column">ITEM</span>
         <span class="comanda-price comanda-header comanda-column">PREÇO</span>
@@ -16,7 +17,7 @@
         <div class="comanda-quantity comanda-column">
             <div class="example-button-row">
                 <div class="example-flex-container">
-                  <button (click)="addItem(comandaItem)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                  <button *ngIf="!comanda.isClosed" (click)="addItem(comandaItem)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
                     <mat-icon>add</mat-icon>
                   </button>
                 </div>
@@ -24,7 +25,7 @@
             <span class="comanda-quantity-span">{{comandaItem.quantidade}}</span>
             <div class="example-button-row">
                 <div class="example-flex-container">
-                  <button (click)="removeItem(comandaItem)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                  <button *ngIf="!comanda.isClosed" (click)="removeItem(comandaItem)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
                     <mat-icon>remove</mat-icon>
                   </button>
                 </div>
@@ -40,4 +41,8 @@
     <div class="comanda-total">
       <app-promocao-parcial></app-promocao-parcial>
   </div>
-    <button (click)="saveItensComanda()" class="btn btn-primary btn-close" type="button">FECHAR COMANDA</button>
+   <div class="center-block text-center">
+    <button *ngIf="!comanda.isClosed" (click)="saveItensComanda()" class="btn btn-primary btn-close" type="button">FECHAR COMANDA</button>
+    <button *ngIf="comanda.isClosed" (click)="onSelect(comanda)" type="button" class="btn btn-primary btn-lg btn-close">VISUALIZAR NOTA</button>
+    <button *ngIf="comanda.isClosed" type="button" class="btn btn-danger btn-lg btn-close">RESETAR COMANDA</button>
+</div>

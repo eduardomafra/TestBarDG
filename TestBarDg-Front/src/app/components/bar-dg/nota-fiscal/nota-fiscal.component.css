@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300i,400,500,700&display=swap');
+.container{
+padding:0;
+margin: 0;
+overflow-x: hidden;
+font-family: 'Raleway', sans-serif;
+}
+h5,h3{
+text-transform: capitalize;
+}
+img{
+max-width: 20%;
+}
+.b-t{
+border-top: 1px solid #ddd;
+}
+/* @media(max-width: 768px){
+.text-right{
+text-align: center !important;
+}
+.pull-right{
+float: none;
+text-align: center;
+}
+.center{
+text-align: center;
+}
+.bg-light.p-5:nth-child(1){
+padding: 1rem !important;
+}
+img{
+max-width: 30%;
+margin: 0 auto;
+display: block;
+}
+.p-5{
+padding: 1rem !important;
+}
+.text-right h5:nth-child(3){
+padding-top: 15px !important;
+}
+.pt-5{
+padding-top: 1rem!important
+}
+} */

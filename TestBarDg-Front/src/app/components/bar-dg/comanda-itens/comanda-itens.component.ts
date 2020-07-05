@@ -5,6 +5,8 @@ import { ComandaItens } from 'src/app/models/comanda-itens';
 import { MessengerService } from 'src/app/services/messenger.service';
 import { Item } from 'src/app/models/item';
 import { Comanda } from 'src/app/models/comanda';
+import { ComandaService } from 'src/app/services/comanda.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-comanda-itens',
@@ -14,12 +16,13 @@ import { Comanda } from 'src/app/models/comanda';
 export class ComandaItensComponent implements OnInit {
 
   comandaItemList: ComandaItens[] = []
+  comanda: Comanda;
 
   comandaTotal = 0;
 
   idComanda = 1;
 
-  constructor(private comandaItensService: ComandaItensService, private msg: MessengerService) {   }
+  constructor(private comandaItensService: ComandaItensService, private msg: MessengerService, private comandaService: ComandaService, private router: Router) {   }
 
   ngOnInit() {
 
@@ -60,6 +63,15 @@ export class ComandaItensComponent implements OnInit {
     })
     
     this.getComandaItensByComanda(this.idComanda); 
+
+    this.comandaService.getComandaById(1).subscribe((comanda) =>{
+      this.comanda = comanda;
+    })
+
+    this.msg.getComanda().subscribe((comanda: Comanda) => {
+      this.comanda = comanda;
+
+    })
   }
   
 
@@ -130,6 +142,10 @@ export class ComandaItensComponent implements OnInit {
 
   handleSendComandaItens(){
     this.msg.sendComandaItens(this.comandaItemList);
+  }
+
+  onSelect(comanda){
+    this.router.navigate(['/nota-fiscal', comanda.id]);
   }
 
 }

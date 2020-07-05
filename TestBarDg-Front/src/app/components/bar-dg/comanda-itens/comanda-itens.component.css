@@ -22,6 +22,18 @@
     background-color: #2D9CDB;
 }
 
+.btn-danger {
+    color: white;
+    background-color: #ff5252;
+    border: none;
+    border-radius: .3em;
+    font-weight: bold;
+}
+
+.btn-danger:hover {
+    background-color: #ff3f34;
+}
+
 .comanda-header {
     font-weight: bold;
     font-size: 1.25em;
@@ -113,7 +125,7 @@
 }
 
 .btn-close {
-    display: block;
-    margin: 40px auto 80px auto;
+    /* display: block; */
+    margin-right: 10px;
     font-size: 1.75em;
 }

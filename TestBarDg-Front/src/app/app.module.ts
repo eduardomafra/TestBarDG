@@ -20,7 +20,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { ComandaListComponent } from './components/bar-dg/comanda-list/comanda-list.component';
 import { ComandaComponent } from './components/bar-dg/comanda-list/comanda/comanda.component';
 import { PromocaoComponent } from './components/bar-dg/promocao/promocao.component';
-import { PromocaoParcialComponent } from './components/bar-dg/promocao/promocao-parcial/promocao-parcial.component'; 
+import { PromocaoParcialComponent } from './components/bar-dg/promocao/promocao-parcial/promocao-parcial.component';
+import { NotaFiscalComponent } from './components/bar-dg/nota-fiscal/nota-fiscal.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { PromocaoParcialComponent } from './components/bar-dg/promocao/promocao-
     ComandaComponent,
     PromocaoComponent,
     PromocaoParcialComponent,
+    NotaFiscalComponent,
   ],
   imports: [
     BrowserModule,
