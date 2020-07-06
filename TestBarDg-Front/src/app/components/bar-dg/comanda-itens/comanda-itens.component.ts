@@ -145,7 +145,7 @@ export class ComandaItensComponent implements OnInit,  OnDestroy {
   }
 
   async addItem(item: ComandaItens){
-    if(!this.bloqueiaSuco){
+    if(!this.bloqueiaSuco(item)){
       item.quantidade += 1;
       item.valorTotal = item.quantidade * item.valorUnitario;
       await this.updateComandaItens(item.id, item);
