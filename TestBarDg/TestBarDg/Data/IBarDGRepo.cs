@@ -24,9 +24,6 @@ namespace TestBarDg.Data
         void inserirItemComanda(ComandaItens comandaItens);
         void DeletarItensComanda(ComandaItens comandaItens);
         void updateItensComanda(ComandaItens comandaItens);
-        IEnumerable<Venda> GetAllVendas();
-        Venda GetVendaById(int id);
-        void FecharComanda(Venda venda);
         void InserirDesconto(Desconto desconto);
         IEnumerable<Desconto> GetAllDescontos();
         IEnumerable<Desconto> GetDescontosByComandaId(int idComanda);

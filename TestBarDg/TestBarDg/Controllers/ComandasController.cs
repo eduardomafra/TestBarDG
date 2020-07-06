@@ -79,31 +79,31 @@ namespace TestBarDg.Controllers
 
         }
 
-        [HttpPatch("{id}")]
-        public ActionResult partialComandaUpdate(int id, JsonPatchDocument<ComandaUpdateDTO> patchDoc)
-        {
-            var comandaModelFromRepo = _repository.GetComandaById(id);
-            if (comandaModelFromRepo == null)
-            {
-                return NotFound();
-            }
+        //[HttpPatch("{id}")]
+        //public ActionResult partialComandaUpdate(int id, JsonPatchDocument<ComandaUpdateDTO> patchDoc)
+        //{
+        //    var comandaModelFromRepo = _repository.GetComandaById(id);
+        //    if (comandaModelFromRepo == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var comandaToPatch = _mapper.Map<ComandaUpdateDTO>(comandaModelFromRepo);
-            patchDoc.ApplyTo(comandaToPatch, ModelState);
+        //    var comandaToPatch = _mapper.Map<ComandaUpdateDTO>(comandaModelFromRepo);
+        //    patchDoc.ApplyTo(comandaToPatch, ModelState);
 
-            if (!TryValidateModel(comandaToPatch))
-            {
-                return ValidationProblem(ModelState);
-            }
+        //    if (!TryValidateModel(comandaToPatch))
+        //    {
+        //        return ValidationProblem(ModelState);
+        //    }
 
-            _mapper.Map(comandaToPatch, comandaModelFromRepo);
+        //    _mapper.Map(comandaToPatch, comandaModelFromRepo);
 
-            _repository.updateComanda(comandaModelFromRepo);
+        //    _repository.updateComanda(comandaModelFromRepo);
 
-            _repository.saveChanges();
+        //    _repository.saveChanges();
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
         [HttpPost("fechar/{id}")]
         public ActionResult FecharComanda(int id)

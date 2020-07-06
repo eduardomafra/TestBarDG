@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using TestBarDg.Data;
 using Newtonsoft.Json.Serialization;
+using Swashbuckle.Swagger;
 
 namespace TestBarDg
 {
@@ -40,6 +41,20 @@ namespace TestBarDg
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IBarDGRepo, SqlBarDGRepo>();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { 
+                    Title = "BarDG API", 
+                    Version = "v1", 
+                    Description = "API desenvolvida para avaliação técnica de desenvolvedor .NET Jr - ClearSale",
+                    License = new Microsoft.OpenApi.Models.OpenApiLicense
+                    {
+                        Name = "Repositório no Github",
+                        Url = new Uri("https://github.com/eduardomafra/TestBarDG")
+                    }
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,6 +72,13 @@ namespace TestBarDg
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Bar do DG");
+            });
 
             app.UseEndpoints(endpoints =>
             {

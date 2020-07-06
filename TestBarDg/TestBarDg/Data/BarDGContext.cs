@@ -17,7 +17,6 @@ namespace TestBarDg.Data
         public DbSet<Item> Itens { get; set; }
         public DbSet<Comanda> Comandas { get; set; }
         public DbSet<ComandaItens> Comanda_Itens { get; set; }
-        public DbSet<Venda> Vendas { get; set; }
         public DbSet<Desconto> Descontos { get; set; }
     }
 }

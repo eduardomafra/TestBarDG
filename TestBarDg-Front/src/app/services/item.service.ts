@@ -3,8 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs";
 
 import { Item } from 'src/app/models/item';
+import { environment } from '../../environments/environment';
 
-const apiUrl = 'http://localhost:49242/api/itens/';
+const url = environment.url  + 'api/itens/';
 
 // var httpOptions = {headers: new HttpHeaders({"Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"})};
 
@@ -16,7 +17,7 @@ export class ItemService {
   constructor(private http: HttpClient) { }
 
   getItens(): Observable<Item[]>{
-    return this.http.get<Item[]>(apiUrl);
+    return this.http.get<Item[]>(url);
   }
 
 }

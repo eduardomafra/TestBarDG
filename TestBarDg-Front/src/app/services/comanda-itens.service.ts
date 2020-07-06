@@ -3,8 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs";
 
 import { ComandaItens } from 'src/app/models/comanda-itens';
+import { environment } from '../../environments/environment';
 
-const url = 'http://localhost:49242/api/comanda_itens';
+const url = environment.url  + 'api/comanda_itens';
 var httpOptions = {headers: new HttpHeaders({"Content-Type": "application/json"})};
 
 @Injectable({

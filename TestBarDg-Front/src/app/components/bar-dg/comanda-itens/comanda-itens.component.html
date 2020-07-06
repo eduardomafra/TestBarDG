@@ -3,9 +3,6 @@
     <ng-container *ngIf="comandaItemList &&  comanda">
     <div *ngIf="comandaItemList.length  === 0" class="alert alert-info">Comanda Vazia</div>
     <div *ngIf="comanda.isClosed" class="alert alert-danger">Comanda fechada</div>
-    <div *ngIf="__bloqueiaSUco" class="alert alert-danger" role="alert">
-      Um simples alerta danger. Olha só!
-    </div>
   </ng-container>
     <div class="comanda-row">
         <span class="comanda-item comanda-header comanda-column">ITEM</span>

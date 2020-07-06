@@ -24,11 +24,6 @@ namespace TestBarDg.Data
             _context.Comanda_Itens.Remove(comandaItens);
         }
 
-        public void FecharComanda(Venda venda)
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<ComandaItens> GetAllComandaItens()
         {
             return _context.Comanda_Itens.ToList();
@@ -48,12 +43,6 @@ namespace TestBarDg.Data
         {
             return _context.Itens.ToList();
         }
-
-        public IEnumerable<Venda> GetAllVendas()
-        {
-            return _context.Vendas.ToList();
-        }
-
         public Comanda GetComandaById(int id)
         {
             return _context.Comandas.FirstOrDefault(p => p.Id == id);
@@ -72,11 +61,6 @@ namespace TestBarDg.Data
         public Item GetItemById(int id)
         {
             return _context.Itens.FirstOrDefault(p => p.Id == id);
-        }
-
-        public Venda GetVendaById(int id)
-        {
-            return _context.Vendas.FirstOrDefault(p => p.Id == id);
         }
 
         public void inserirComanda(Comanda comanda)
