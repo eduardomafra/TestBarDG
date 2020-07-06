@@ -1,13 +1,18 @@
 
     <h2 class="section-header">COMANDA</h2>
+    <ng-container *ngIf="comandaItemList &&  comanda">
     <div *ngIf="comandaItemList.length  === 0" class="alert alert-info">Comanda Vazia</div>
     <div *ngIf="comanda.isClosed" class="alert alert-danger">Comanda fechada</div>
+    <div *ngIf="__bloqueiaSUco" class="alert alert-danger" role="alert">
+      Um simples alerta danger. Olha só!
+    </div>
+  </ng-container>
     <div class="comanda-row">
         <span class="comanda-item comanda-header comanda-column">ITEM</span>
         <span class="comanda-price comanda-header comanda-column">PREÇO</span>
         <span class="comanda-quantity comanda-header comanda-column">QUANTIDADE</span>
     </div>
-    
+    <ng-container *ngIf="comandaItemList && comanda">
     <div class="comanda-items comanda-row" *ngFor="let comandaItem of comandaItemList" [value]="comandaItem">
         <div class="comanda-item comanda-column">
             <img class="comanda-item-image" src="../../../../assets/{{comandaItem.idItem}}.jpg" width="100" height="100">
@@ -17,7 +22,7 @@
         <div class="comanda-quantity comanda-column">
             <div class="example-button-row">
                 <div class="example-flex-container">
-                  <button *ngIf="!comanda.isClosed" (click)="addItem(comandaItem)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                  <button *ngIf="(!comanda.isClosed) && !(comandaItem.idItem == 3 && comandaItem.quantidade >= 3)" (click)="addItem(comandaItem)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
                     <mat-icon>add</mat-icon>
                   </button>
                 </div>
@@ -30,19 +35,20 @@
                   </button>
                 </div>
               </div>
-            <!-- <input class="comanda-quantity-input" [(ngModel)]="comandaItem.quantidade" (change)="attValor(comandaItem)" type="number" value="{{comandaItem.quantidade}}"> -->
-            <!-- <button class="btn btn-danger" (click)="removeItem(comandaItem)" type="button">REMOVER</button> -->
         </div>
     </div>
+  </ng-container>
     <div class="comanda-total">
         <strong class="comanda-total-title">Total</strong>
         <span class="">{{comandaTotal}}</span>       
     </div>
     <div class="comanda-total">
-      <app-promocao-parcial></app-promocao-parcial>
   </div>
    <div class="center-block text-center">
-    <button *ngIf="!comanda.isClosed" (click)="saveItensComanda()" class="btn btn-primary btn-close" type="button">FECHAR COMANDA</button>
+  <ng-container *ngIf="comanda">
+    <button *ngIf="!comanda.isClosed" (click)="onSelect(comanda)" class="btn btn-primary btn-close" type="button">FECHAR COMANDA</button>
     <button *ngIf="comanda.isClosed" (click)="onSelect(comanda)" type="button" class="btn btn-primary btn-lg btn-close">VISUALIZAR NOTA</button>
-    <button *ngIf="comanda.isClosed" type="button" class="btn btn-danger btn-lg btn-close">RESETAR COMANDA</button>
+    <button *ngIf="comanda.isClosed" (click)="resetarComanda(comanda)" type="button" class="btn btn-danger btn-lg btn-close">RESETAR COMANDA</button>
+    <!-- <button (click)="tst()" type="button" class="btn btn-danger btn-lg btn-close">tst</button> -->
+  </ng-container>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-bar-dg',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BarDgComponent implements OnInit {
 
-  constructor() { }
+  public id;
+  idComanda: number;
+  constructor(private route: ActivatedRoute) {  this.id = parseInt(this.route.snapshot.paramMap.get('id')); }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.idComanda = parseInt(this.route.snapshot.paramMap.get('id'));
   }
 
 }

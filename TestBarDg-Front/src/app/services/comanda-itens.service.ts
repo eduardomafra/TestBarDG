@@ -24,18 +24,18 @@ export class ComandaItensService {
     
   }
 
-  deleteComandaItensById(id: number): Observable<number>{
+  async deleteComandaItensById(id: number): Promise<number>{
     const apiUrl = url +  '/' + id;
-    return this.http.delete<number>(apiUrl);
+    return this.http.delete<number>(apiUrl).toPromise();
   }
 
-  insertComandaItens(comandaItem: ComandaItens): Observable<ComandaItens>{
-    return this.http.post<ComandaItens>(url, comandaItem);
+  async insertComandaItens(comandaItem: ComandaItens): Promise<ComandaItens>{
+    return this.http.post<ComandaItens>(url, comandaItem).toPromise();
   }
 
-  updateComandaItens(id: number, comandaItem: ComandaItens): Observable<ComandaItens>{
+  async updateComandaItens(id: number, comandaItem: ComandaItens): Promise<ComandaItens>{
     const apiUrl = url + '/' + id;
-    return this.http.put<ComandaItens>(apiUrl, comandaItem, httpOptions);
+    return this.http.put<ComandaItens>(apiUrl, comandaItem, httpOptions).toPromise();
   }
 
 

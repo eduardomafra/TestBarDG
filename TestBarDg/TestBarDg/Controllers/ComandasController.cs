@@ -111,7 +111,7 @@ namespace TestBarDg.Controllers
             var comandaModelFromRepo = _repository.GetComandaById(id);
             var comandaItensListFromRepo = _repository.GetAllComandaItensByComanda(id);
 
-            if (comandaModelFromRepo == null || comandaModelFromRepo == null)
+            if (comandaModelFromRepo == null || comandaItensListFromRepo == null)
             {
                 return NotFound();
             }
@@ -124,6 +124,35 @@ namespace TestBarDg.Controllers
             }
 
             comandaModelFromRepo.isClosed = true;
+
+            return updateComanda(comandaModelFromRepo.Id, _mapper.Map<ComandaUpdateDTO>(comandaModelFromRepo));
+        }
+
+        [HttpPost("resetar/{id}")]
+        public ActionResult ResetarComanda(int id)
+        {
+            var comandaModelFromRepo = _repository.GetComandaById(id);
+            var comandaItensListFromRepo = _repository.GetAllComandaItensByComanda(id);
+            var descontoListFromRepo = _repository.GetDescontosByComandaId(id);
+
+            if (comandaModelFromRepo == null || comandaItensListFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            foreach(ComandaItens comandaItens in comandaItensListFromRepo)
+            {
+                _repository.DeletarItensComanda(comandaItens);
+            }
+
+            foreach(Desconto descontos in descontoListFromRepo)
+            {
+                _repository.DeletarDesconto(descontos);
+            }
+
+            _repository.saveChanges();
+
+            comandaModelFromRepo.isClosed = false;
 
             return updateComanda(comandaModelFromRepo.Id, _mapper.Map<ComandaUpdateDTO>(comandaModelFromRepo));
         }

@@ -124,5 +124,24 @@ namespace TestBarDg.Data
 
             _context.Descontos.Add(desconto);
         }
+
+        public IEnumerable<Desconto> GetDescontosByComandaId(int idComanda)
+        {
+            return _context.Descontos.Where(w => w.IdComanda == idComanda).OrderBy(o => o.IdItem).ToList();
+        }
+
+        public IEnumerable<Desconto> GetAllDescontos()
+        {
+            return _context.Descontos.ToList();
+        }
+
+        public void DeletarDesconto(Desconto desconto)
+        {
+            if (desconto == null)
+            {
+                throw new ArgumentNullException(nameof(desconto));
+            }
+            _context.Descontos.Remove(desconto);
+        }
     }
 }

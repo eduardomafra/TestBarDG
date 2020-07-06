@@ -3,6 +3,8 @@
       <div  class="card-body"><hr>
         <h5 class="card-title">R$ {{item.preco}}</h5>
         <p class="card-text">{{item.descricao}}</p>
-        <button [disabled]="comanda.isClosed" (click)="handleAddToComanda()" class="btn btn-outline-primary btn-md btn-block">Adicionar</button>
+        <ng-container *ngIf="comanda">
+        <button [disabled]="(comanda.isClosed) || ((bloqueiaSuco) && (item.id == 3))" (click)="handleAddToComanda()" class="btn btn-outline-primary btn-md btn-block">Adicionar</button>
+      </ng-container>
       </div>
     </div>

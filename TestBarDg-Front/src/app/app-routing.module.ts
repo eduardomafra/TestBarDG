@@ -5,9 +5,9 @@ import { BarDgComponent } from './components/bar-dg/bar-dg.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'bar', pathMatch: 'full' },
-  { path: 'bar', component: BarDgComponent},
-  { path: 'nota-fiscal/:id', component: NotaFiscalComponent}
+  { path: '', redirectTo: 'comanda/1', pathMatch: 'full' },
+  { path: 'comanda/:id', component: BarDgComponent},
+  { path: 'comanda/nota-fiscal/:id', component: NotaFiscalComponent}
 ];
 
 @NgModule({

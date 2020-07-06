@@ -1,5 +1,5 @@
 <div #item class="row row-cols-1 row-cols-md-4">
     <div *ngFor="let item of itemList" [value]="item" class="col mb-4">
-        <app-item [item] = "item"></app-item>
+        <app-item [idComanda]="idComanda" [item] = "item"></app-item>
     </div>
 </div>

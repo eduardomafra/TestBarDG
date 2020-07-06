@@ -14,6 +14,7 @@ namespace TestBarDg.Profiles
         {
             CreateMap<DescontoCreateDTO, Desconto>();
             CreateMap<Desconto, DescontoCreateDTO>();
+            CreateMap<Desconto, DescontoReadDTO>();
         }
         
     }

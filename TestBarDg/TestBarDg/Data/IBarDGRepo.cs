@@ -28,5 +28,8 @@ namespace TestBarDg.Data
         Venda GetVendaById(int id);
         void FecharComanda(Venda venda);
         void InserirDesconto(Desconto desconto);
+        IEnumerable<Desconto> GetAllDescontos();
+        IEnumerable<Desconto> GetDescontosByComandaId(int idComanda);
+        void DeletarDesconto(Desconto desconto);
     }
 }

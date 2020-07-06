@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/shared/header/header.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
@@ -19,8 +20,6 @@ import { ItemComponent } from './components/bar-dg/item-list/item/item.component
 import {MatIconModule} from '@angular/material/icon';
 import { ComandaListComponent } from './components/bar-dg/comanda-list/comanda-list.component';
 import { ComandaComponent } from './components/bar-dg/comanda-list/comanda/comanda.component';
-import { PromocaoComponent } from './components/bar-dg/promocao/promocao.component';
-import { PromocaoParcialComponent } from './components/bar-dg/promocao/promocao-parcial/promocao-parcial.component';
 import { NotaFiscalComponent } from './components/bar-dg/nota-fiscal/nota-fiscal.component';
 
 @NgModule({
@@ -35,8 +34,6 @@ import { NotaFiscalComponent } from './components/bar-dg/nota-fiscal/nota-fiscal
     ItemComponent,
     ComandaListComponent,
     ComandaComponent,
-    PromocaoComponent,
-    PromocaoParcialComponent,
     NotaFiscalComponent,
   ],
   imports: [
@@ -48,7 +45,8 @@ import { NotaFiscalComponent } from './components/bar-dg/nota-fiscal/nota-fiscal
     MatCardModule,
     MatButtonModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
