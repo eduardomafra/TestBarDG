@@ -111,7 +111,7 @@ namespace TestBarDg.Controllers
             var comandaModelFromRepo = _repository.GetComandaById(id);
             var comandaItensListFromRepo = _repository.GetAllComandaItensByComanda(id);
 
-            if (comandaModelFromRepo == null || comandaItensListFromRepo == null)
+            if (comandaModelFromRepo == null || (comandaItensListFromRepo == null))
             {
                 return NotFound();
             }

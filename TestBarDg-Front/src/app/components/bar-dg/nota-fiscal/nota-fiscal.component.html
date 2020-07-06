@@ -3,7 +3,10 @@
       <app-comanda-list></app-comanda-list>
   </div>
   <div class="col-md-10">
-    <div class="container">
+    <div *ngIf="!comanda.isClosed" class="alert alert-warning" role="alert">
+      Não é possível exibir nota fiscal de uma comanda aberta
+    </div>
+    <div *ngIf="comanda.isClosed" class="container">
     <div class="bg-light p-5">
       <h1 class="text-center m-0">Bar do DG</h1>
       <div class="col-md-12 text-center">
