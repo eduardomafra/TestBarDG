@@ -26,7 +26,7 @@ Executar o comando `ng serve` para iniciar o servidor web, por padrão ele estar
 
 ## Importante
 
-No arquivo `TestBarDg-Front/src/environments/environments.ts` é possível alterar a url da API consumida pelo projeto web, por padrão está definido http://localhost:49242/ mas este endereço pode mudar de acordo com o sistema operacional
+No arquivo `TestBarDg-Front/src/environments/environments.ts` é possível alterar a url da API consumida pelo projeto web, por padrão está definido http://localhost:49242/ mas a porta pode mudar de acordo com o sistema operacional
 
 ## Documentação da API
 
