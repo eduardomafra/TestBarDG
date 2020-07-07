@@ -2,7 +2,7 @@
 
 Projeto desenvolvido para avaliação técnica de Dev .NET Jr - ClearSale  
   
-Foi utilizado .NET Core 3.1 para o desenvolvimento da API e Angular para as páginas web
+As ferramentas utilizadas foram .NET Core 3.1 para o desenvolvimento da API e Angular para as páginas web
 
 ## Requisitos
 
