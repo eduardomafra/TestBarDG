@@ -6,7 +6,7 @@ Foi utilizado .NET Core 3.1 para o desenvolvimento da API e Angular para as pág
 
 ## Requisitos
 
-[.NET SDK 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1)  
+[.NET Core SDK 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1)  
   
 [NodeJS 12 LTS](https://nodejs.org/en/download/)  
 
@@ -31,3 +31,4 @@ No arquivo `TestBarDg-Front/src/environments/environments.ts` é possível alter
 ## Documentação da API
 
 A documentação da API foi gerada pela biblioteca Swagger e pode ser encontrada em http://localhost:{porta}/swagger/index.html
+se vc estiver lendo esse commit, saiba que eu quero muito trabalhar aí
