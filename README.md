@@ -31,4 +31,3 @@ No arquivo `TestBarDg-Front/src/environments/environments.ts` é possível alter
 ## Documentação da API
 
 A documentação da API foi gerada pela biblioteca Swagger e pode ser encontrada em http://localhost:{porta}/swagger/index.html
-se vc estiver lendo esse commit, saiba que eu quero muito trabalhar aí
