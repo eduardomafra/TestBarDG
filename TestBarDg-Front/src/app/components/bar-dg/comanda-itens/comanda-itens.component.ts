@@ -14,7 +14,7 @@ import { from, Subscription } from 'rxjs';
   templateUrl: './comanda-itens.component.html',
   styleUrls: ['./comanda-itens.component.css']
 })
-export class ComandaItensComponent implements OnInit,  OnDestroy {
+export class ComandaItensComponent implements OnInit, OnDestroy {
 
   @Input() idComanda: number;
   comandaItemList: ComandaItens[] = []

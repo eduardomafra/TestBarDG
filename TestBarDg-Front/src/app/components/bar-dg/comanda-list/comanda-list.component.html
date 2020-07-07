@@ -1,6 +1,11 @@
 <div class="row">
-    <mat-selection-list [multiple]="false">
+  <div class="menuComanda">
+    <div class="list-group list-group-flush">
       <app-comanda [comanda]="comanda" *ngFor="let comanda of comandas$ | async"></app-comanda>
-    </mat-selection-list>
+    </div>
+  </div>
+    <!-- <mat-selection-list [multiple]="false">
+      <app-comanda [comanda]="comanda" *ngFor="let comanda of comandas$ | async"></app-comanda>
+    </mat-selection-list> -->
   </div>
   

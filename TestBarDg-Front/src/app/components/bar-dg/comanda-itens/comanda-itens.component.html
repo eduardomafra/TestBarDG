@@ -1,7 +1,8 @@
 
     <h2 class="section-header">COMANDA</h2>
-    <ng-container *ngIf="comandaItemList &&  comanda">
-    <div *ngIf="comandaItemList.length  === 0" class="alert alert-info">Comanda Vazia</div>
+    <div *ngIf="!comanda" class="alert alert-danger">Comanda inexistente</div>
+    <ng-container *ngIf="comandaItemList && comanda">
+    <div *ngIf="comandaItemList.length  === 0" class="alert alert-info">Comanda vazia</div>
     <div *ngIf="comanda.isClosed" class="alert alert-danger">Comanda fechada</div>
   </ng-container>
     <div class="comanda-row">
@@ -19,16 +20,16 @@
         <div class="comanda-quantity comanda-column">
             <div class="example-button-row">
                 <div class="example-flex-container">
-                  <button *ngIf="(!comanda.isClosed) && !(comandaItem.idItem == 3 && comandaItem.quantidade >= 3)" (click)="addItem(comandaItem)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
-                    <mat-icon>add</mat-icon>
-                  </button>
+                  <button class="btn btn-default" *ngIf="(!comanda.isClosed) && !(comandaItem.idItem == 3 && comandaItem.quantidade >= 3)" (click)="addItem(comandaItem)" aria-label="Example icon button with a vertical three dot icon">
+                    <i class="fa fa-plus" aria-hidden="true"></i>                    
+                  </button>                 
                 </div>
               </div>
             <span class="comanda-quantity-span">{{comandaItem.quantidade}}</span>
             <div class="example-button-row">
                 <div class="example-flex-container">
-                  <button *ngIf="!comanda.isClosed" (click)="removeItem(comandaItem)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
-                    <mat-icon>remove</mat-icon>
+                  <button class="btn btn-default" *ngIf="!comanda.isClosed" (click)="removeItem(comandaItem)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                    <i class="fa fa-minus" aria-hidden="true"></i>
                   </button>
                 </div>
               </div>
@@ -46,6 +47,5 @@
     <button *ngIf="!comanda.isClosed"  [disabled]="comandaItensIsEmpty()" (click)="onSelect(comanda)" class="btn btn-primary btn-close" type="button">FECHAR COMANDA</button>
     <button *ngIf="comanda.isClosed" (click)="onSelect(comanda)" type="button" class="btn btn-primary btn-lg btn-close">VISUALIZAR NOTA</button>
     <button *ngIf="comanda.isClosed" (click)="resetarComanda(comanda)" type="button" class="btn btn-danger btn-lg btn-close">RESETAR COMANDA</button>
-    <!-- <button (click)="tst()" type="button" class="btn btn-danger btn-lg btn-close">tst</button> -->
   </ng-container>
 </div>
