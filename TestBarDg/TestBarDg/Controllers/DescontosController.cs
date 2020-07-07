@@ -22,6 +22,10 @@ namespace TestBarDg.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Retorna todos os descontos.
+        /// </summary>
+        /// <param name="id"></param>  
         [HttpGet]
         public ActionResult<IEnumerable<DescontoReadDTO>> GetAllDescontos()
         {
@@ -30,6 +34,10 @@ namespace TestBarDg.Controllers
             return Ok(_mapper.Map<IEnumerable<DescontoReadDTO>>(descontos));
         }
 
+        /// <summary>
+        /// Retorna todos os descontos de uma comanda específica.
+        /// </summary>
+        /// <param name="id"></param>  
         [HttpGet("comanda/{idComanda}", Name = "GetDescontosByComandaId")]
         public ActionResult<IEnumerable<DescontoReadDTO>> GetDescontosByComandaId(int idComanda)
         {

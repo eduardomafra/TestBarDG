@@ -84,6 +84,14 @@ export class ComandaItensComponent implements OnInit,  OnDestroy {
     })
   }
   
+  comandaItensIsEmpty(): boolean{
+    if(Object.keys(this.comandaItemList).length === 0){
+      return true;
+    }
+
+    return false;
+
+  }
 
   getTotal(){
     this.comandaTotal = 0;

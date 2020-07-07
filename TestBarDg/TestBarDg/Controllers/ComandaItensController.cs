@@ -24,6 +24,10 @@ namespace TestBarDg.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Retorna todos os itens presentes em todas as comandas.
+        /// </summary>
+        /// <param name="id"></param>  
         [HttpGet]
         public ActionResult<IEnumerable<ComandaItensReadDTO>> GetAllComandaItens()
         {
@@ -32,6 +36,10 @@ namespace TestBarDg.Controllers
             return Ok(_mapper.Map<IEnumerable<ComandaItensReadDTO>>(comandaItens));
         }
 
+        /// <summary>
+        /// Retorna um item inserido em uma comanda de acordo com o id.
+        /// </summary>
+        /// <param name="id"></param>  
         [HttpGet("{id}", Name = "GetComandaItensById")]
         public ActionResult<ComandaItensReadDTO> GetComandaItensById(int id)
         {
@@ -45,6 +53,10 @@ namespace TestBarDg.Controllers
 
         }
 
+        /// <summary>
+        /// Retorna todos os itens de uma comanda específica.
+        /// </summary>
+        /// <param name="id"></param>  
         [HttpGet("comanda/{idComanda}", Name = "GetAllComandaItensByComanda")]
         public ActionResult<IEnumerable<ComandaItensReadDTO>> GetAllComandaItensByComanda(int idComanda)
         {
@@ -57,20 +69,11 @@ namespace TestBarDg.Controllers
             return NotFound();
 
         }
-        /*
-        [HttpGet("comanda/{id}", Name= "GetComandaItensByComanda")]
-        public ActionResult<ComandaItensReadDTO> GetComandaItensByComanda(int id)
-        {
-            var comandaItens = _repository.GetComandaItensByComanda(id);
 
-            if (comandaItens != null)
-            {
-                return Ok(_mapper.Map<ComandaItensReadDTO>(comandaItens));
-            }
-            return NotFound();
-
-        }*/
-
+        /// <summary>
+        /// Insere um item em uma comanda específica.
+        /// </summary>
+        /// <param name="id"></param>  
         [HttpPost]
         public ActionResult<ComandaItensReadDTO> inserirItemComanda(ComandaItensCreateDTO comandaItensCreateDto)
         {
@@ -84,6 +87,10 @@ namespace TestBarDg.Controllers
 
         }
 
+        /// <summary>
+        /// Deleta um item de uma comanda específica.
+        /// </summary>
+        /// <param name="id"></param>  
         [HttpDelete("{id}")]
         public ActionResult DeletarItensComanda(int id)
         {
@@ -100,6 +107,10 @@ namespace TestBarDg.Controllers
 
         }
 
+        /// <summary>
+        /// Atualiza um item inserido em uma comanda específica.
+        /// </summary>
+        /// <param name="id"></param>  
         [HttpPut("{id}")]
         public ActionResult updateItensComanda(int id, ComandaItensUpdateDTO comandaItensUpdateDTO)
         {

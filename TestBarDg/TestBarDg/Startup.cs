@@ -14,6 +14,9 @@ using Microsoft.Extensions.Logging;
 using TestBarDg.Data;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.Swagger;
+using TestBarDg.Utils;
+using System.Reflection;
+using System.IO;
 
 namespace TestBarDg
 {
@@ -40,11 +43,11 @@ namespace TestBarDg
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddScoped<IBarDGRepo, SqlBarDGRepo>();
+            services.AddScoped<IBarDGRepo, SqlBarDGRepo>().AddScoped<IUtilsRepo, UtilsRepo>();
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { 
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo {
                     Title = "BarDG API", 
                     Version = "v1", 
                     Description = "API desenvolvida para avaliação técnica de desenvolvedor .NET Jr - ClearSale",
@@ -54,6 +57,9 @@ namespace TestBarDg
                         Url = new Uri("https://github.com/eduardomafra/TestBarDG")
                     }
                 });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
         }
 

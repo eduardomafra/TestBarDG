@@ -43,7 +43,7 @@
   </div>
    <div class="center-block text-center">
   <ng-container *ngIf="comanda">
-    <button *ngIf="!comanda.isClosed" (click)="onSelect(comanda)" class="btn btn-primary btn-close" type="button">FECHAR COMANDA</button>
+    <button *ngIf="!comanda.isClosed"  [disabled]="comandaItensIsEmpty()" (click)="onSelect(comanda)" class="btn btn-primary btn-close" type="button">FECHAR COMANDA</button>
     <button *ngIf="comanda.isClosed" (click)="onSelect(comanda)" type="button" class="btn btn-primary btn-lg btn-close">VISUALIZAR NOTA</button>
     <button *ngIf="comanda.isClosed" (click)="resetarComanda(comanda)" type="button" class="btn btn-danger btn-lg btn-close">RESETAR COMANDA</button>
     <!-- <button (click)="tst()" type="button" class="btn btn-danger btn-lg btn-close">tst</button> -->

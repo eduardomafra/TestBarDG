@@ -22,6 +22,10 @@ namespace TestBarDg.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Retorna todos os itens.
+        /// </summary>
+        /// <param name="id"></param>  
         [HttpGet]
         public ActionResult<IEnumerable<ItemReadDTO>> GetAllItens()
         {
@@ -30,6 +34,10 @@ namespace TestBarDg.Controllers
             return Ok(_mapper.Map<IEnumerable<ItemReadDTO>>(items));
         }
 
+        /// <summary>
+        /// Retorna um item específica de acordo com o id
+        /// </summary>
+        /// <param name="id"></param>  
         [HttpGet("{id}")]
         public ActionResult<ItemReadDTO> GetItemById(int id)
         {
