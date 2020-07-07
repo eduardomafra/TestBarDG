@@ -10,7 +10,7 @@ Foi utilizado .NET Core 3.1 para o desenvolvimento da API e Angular para as pág
 
 ## Instruções API
 
-Navegar até a pasta `/TestBarDg` através do terminal e executar o comando `dotnet build` para compilar o projeto e todas suas dependências  
+Navegar até a pasta `/TestBarDg` através do terminal e executar o comando `dotnet build` para compilar o projeto e todas suas dependências    
 Em seguida navegar até `/TestBarDg/TestBarDg` e executar o comando `dotnet run` para iniciar a API
 
 ## Instruções Web
