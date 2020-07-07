@@ -1,22 +1,22 @@
 # Projeto
 
-Projeto desenvolvido para avaliação técnica de Dev .NET Jr - ClearSale
+Projeto desenvolvido para avaliação técnica de Dev .NET Jr - ClearSale<br/>
 Foi utilizado .NET Core 3.1 para o desenvolvimento da API e Angular para as páginas web
 
 ## Requisitos
 
-[.NET SDK 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1)
-[NodeJS 12 LTS](https://nodejs.org/en/download/)
+[.NET SDK 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1)<br/>
+[NodeJS 12 LTS](https://nodejs.org/en/download/)<br/>
 
 ## Instruções API
 
-Navegar até a pasta /TestBarDg através do terminal e executar o comando `dotnet build` para compilar o projeto e todas suas dependências
-Em seguida navegar até /TestBarDg/TestBarDg e executar o comando `dotnet run` para iniciar a API
+Navegar até a pasta `/TestBarDg` através do terminal e executar o comando `dotnet build` para compilar o projeto e todas suas dependências<br/>
+Em seguida navegar até `/TestBarDg/TestBarDg` e executar o comando `dotnet run` para iniciar a API
 
 ## Instruções Web
 
-Com o NodeJs instalado no computador, iniciar o terminal e digitar `npm install -g @angular/cli` para baixar a última versão do Angular e reiniciar o terminal após o término
-Navegar até a pasta TestBarDg-Front através do terminal e rodar o comando `npm install` para instalar todas as dependências do projeto
+Com o NodeJs instalado no computador, iniciar o terminal e digitar `npm install -g @angular/cli` para baixar a última versão do Angular e reiniciar o terminal após o término<br/>
+Navegar até a pasta `TestBarDg-Front` através do terminal e rodar o comando `npm install` para instalar todas as dependências do projeto<br/>
 Executar o comando `ng serve` para iniciar o servidor web, por padrão ele estará rodando em http://localhost:4200/
 
 ## Importante
