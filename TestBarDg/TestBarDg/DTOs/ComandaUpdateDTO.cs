@@ -10,5 +10,6 @@ namespace TestBarDg.DTOs
     {
         [Required]
         public bool isClosed { get; set; }
+        public DateTime data { get; set; }
     }
 }

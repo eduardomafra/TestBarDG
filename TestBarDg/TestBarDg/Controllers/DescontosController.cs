@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -24,9 +25,11 @@ namespace TestBarDg.Controllers
 
         /// <summary>
         /// Retorna todos os descontos.
-        /// </summary>
-        /// <param name="id"></param>  
+        /// </summary> 
+        /// <returns>Ok</returns>
+        /// <response code="200">Retorna todos os descontos</response>   
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<DescontoReadDTO>> GetAllDescontos()
         {
             var descontos = _repository.GetAllDescontos();
@@ -38,7 +41,12 @@ namespace TestBarDg.Controllers
         /// Retorna todos os descontos de uma comanda específica.
         /// </summary>
         /// <param name="id"></param>  
+        /// <returns>Desconto de acordo com comanda</returns>
+        /// <response code="200">Retorna todos os descontos de determinada comanda</response>   
+        /// <response code="404">Comanda não encontrada</response> 
         [HttpGet("comanda/{idComanda}", Name = "GetDescontosByComandaId")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<IEnumerable<DescontoReadDTO>> GetDescontosByComandaId(int idComanda)
         {
             var descontoItens = _repository.GetDescontosByComandaId(idComanda);

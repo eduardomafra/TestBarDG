@@ -14,5 +14,6 @@ namespace TestBarDg.Models
         [Required]
         public bool isClosed { get; set; }
 
+        public DateTime data { get; set; }
     }
 }

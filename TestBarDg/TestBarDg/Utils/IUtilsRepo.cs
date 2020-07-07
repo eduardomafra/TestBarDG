@@ -13,6 +13,7 @@ namespace TestBarDg.Utils
         bool comandaItemListIsEmpty(IEnumerable<ComandaItens> comandaItemList);
         IEnumerable<DescontoCreateDTO> getDesconto(IEnumerable<ComandaItens> comandaItensList);
         bool verificaSuco(IEnumerable<ComandaItens> comandaItemList);
-
+        IEnumerable<Item> getItens();
+        IEnumerable<Comanda> getComandas();
     }
 }

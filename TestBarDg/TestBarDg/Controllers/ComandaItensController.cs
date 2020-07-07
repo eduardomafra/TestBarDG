@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -27,8 +28,10 @@ namespace TestBarDg.Controllers
         /// <summary>
         /// Retorna todos os itens presentes em todas as comandas.
         /// </summary>
-        /// <param name="id"></param>  
+        /// <returns>Ok</returns>
+        /// <response code="200">Retorna todos os itens registrados em comandas</response>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<ComandaItensReadDTO>> GetAllComandaItens()
         {
             var comandaItens = _repository.GetAllComandaItens();
@@ -38,9 +41,14 @@ namespace TestBarDg.Controllers
 
         /// <summary>
         /// Retorna um item inserido em uma comanda de acordo com o id.
-        /// </summary>
+        /// </summary> 
+        /// <returns>Ok</returns>
         /// <param name="id"></param>  
+        /// <response code="200">Retorna um item registrado em uma comanda de acordo com o id</response>
+        /// <response code="404">Se o id do item na comanda não existir</response>  
         [HttpGet("{id}", Name = "GetComandaItensById")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<ComandaItensReadDTO> GetComandaItensById(int id)
         {
             var comandaItens = _repository.GetComandaItensById(id);
@@ -56,8 +64,13 @@ namespace TestBarDg.Controllers
         /// <summary>
         /// Retorna todos os itens de uma comanda específica.
         /// </summary>
-        /// <param name="id"></param>  
+        /// <returns>Ok</returns>
+        /// <param name="idComanda"></param>  
+        /// <response code="200">Itens encontrados</response>
+        /// <response code="404">Se o id da comanda não existir</response>  
         [HttpGet("comanda/{idComanda}", Name = "GetAllComandaItensByComanda")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<IEnumerable<ComandaItensReadDTO>> GetAllComandaItensByComanda(int idComanda)
         {
             var comandaItens = _repository.GetAllComandaItensByComanda(idComanda);
@@ -73,8 +86,27 @@ namespace TestBarDg.Controllers
         /// <summary>
         /// Insere um item em uma comanda específica.
         /// </summary>
-        /// <param name="id"></param>  
+        /// <param name="comandaItensCreateDto"></param>  
+        /// <summary>
+        /// Insere uma comanda.
+        /// </summary>
+        /// <remarks>
+        /// Modelo request:
+        ///     
+        ///     {
+        ///         "idComanda": 4,
+        ///         "idItem": 3,
+        ///         "nomeItem": "Suco",
+        ///         "quantidade": 4,
+        ///         "valorUnitario": 50.0,
+        ///         "valorTotal": 200.0
+        ///     }
+        ///
+        /// </remarks>
+        /// <returns>Um novo item inserido em uma comanda</returns>
+        /// <response code="201">Retorna o novo item registrado para a comanda</response>  
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         public ActionResult<ComandaItensReadDTO> inserirItemComanda(ComandaItensCreateDTO comandaItensCreateDto)
         {
             var comandaItensModel = _mapper.Map<ComandaItens>(comandaItensCreateDto);
@@ -88,10 +120,15 @@ namespace TestBarDg.Controllers
         }
 
         /// <summary>
-        /// Deleta um item de uma comanda específica.
+        /// Deleta um item de uma comanda.
         /// </summary>
         /// <param name="id"></param>  
+        /// <returns>NoContent</returns>
+        /// <response code="204">Item deletado</response>  
+        /// <response code="404">Item não encontrado</response> 
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult DeletarItensComanda(int id)
         {
             var itensComandaModelFromRepo = _repository.GetComandaItensById(id);
@@ -108,10 +145,27 @@ namespace TestBarDg.Controllers
         }
 
         /// <summary>
-        /// Atualiza um item inserido em uma comanda específica.
+        /// Atualiza um item inserido em uma comanda.
         /// </summary>
-        /// <param name="id"></param>  
+        /// <param name="comandaItensUpdateDTO"></param>  
+        /// <remarks>
+        /// Modelo request:
+        ///     
+        ///     {
+        ///         "id": 1,
+        ///         "idComanda": 4,
+        ///         "idItem": 3,
+        ///         "nomeItem": "Suco",
+        ///         "quantidade": 4,
+        ///         "valorUnitario": 50.0,
+        ///         "valorTotal": 200.0
+        ///     }
+        ///
+        /// </remarks>
+        /// <returns>No content</returns>
+        /// <response code="204">Item atualizado</response>   
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult updateItensComanda(int id, ComandaItensUpdateDTO comandaItensUpdateDTO)
         {
             var itensComandaModelFromRepo = _repository.GetComandaItensById(id);

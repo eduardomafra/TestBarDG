@@ -35,7 +35,7 @@ export class ComandaItensComponent implements OnInit,  OnDestroy {
     var self = this;
 
     this.subscription = this.msg.getItem().subscribe(async (item: Item) => {
-      console.log(item)
+      // console.log(item)
       var verificaItem = false;
       this.handleSendComandaItens();
       this.comandaItemList.forEach(async function (itens) {

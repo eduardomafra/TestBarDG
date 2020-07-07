@@ -28,7 +28,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log(this.idComanda)
+
     this.subscription = this.comandaService.getComandaById(this.idComanda).subscribe((comanda) =>{
       this.comanda = comanda;
     })

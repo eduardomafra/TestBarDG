@@ -19,6 +19,21 @@ namespace TestBarDg.Utils
             return false;           
         }
 
+        public IEnumerable<Comanda> getComandas()
+        {
+            var comandas = new List<Comanda>
+            {
+                new Comanda{isClosed = false},
+                new Comanda{isClosed = false},
+                new Comanda{isClosed = false},
+                new Comanda{isClosed = false},
+                new Comanda{isClosed = false},
+            };
+
+            return comandas;
+
+        }
+
         public IEnumerable<DescontoCreateDTO> getDesconto(IEnumerable<ComandaItens> comandaItensList)
         {
             List<DescontoCreateDTO> desconto = new List<DescontoCreateDTO>();
@@ -61,6 +76,20 @@ namespace TestBarDg.Utils
             }
 
             return desconto;
+        }
+
+        public IEnumerable<Item> getItens()
+        {
+            var itens = new List<Item>
+            {
+                new Item{Id=1, Descricao = "Cerveja", Preco =  5},
+                new Item{Id=2, Descricao = "Conhaque", Preco =  20},
+                new Item{Id=3, Descricao = "Suco", Preco =  50},
+                new Item{Id=4, Descricao = "Água", Preco =  70}
+            };
+
+            return itens;
+
         }
 
         public bool verificaSuco(IEnumerable<ComandaItens> comandaItemList)

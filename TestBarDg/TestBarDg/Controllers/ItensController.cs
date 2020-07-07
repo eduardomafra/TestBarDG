@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -25,8 +26,10 @@ namespace TestBarDg.Controllers
         /// <summary>
         /// Retorna todos os itens.
         /// </summary>
-        /// <param name="id"></param>  
+        /// <returns>Ok</returns>
+        /// <response code="200">Retorna todos os itens</response>    
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<ItemReadDTO>> GetAllItens()
         {
             var items = _repository.GetAllItens();
@@ -37,8 +40,11 @@ namespace TestBarDg.Controllers
         /// <summary>
         /// Retorna um item específica de acordo com o id
         /// </summary>
-        /// <param name="id"></param>  
+        /// <param name="id"></param> 
+        /// <returns>Ok</returns>
+        /// <response code="200">Retorna o item de acordo com o id</response>   
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<ItemReadDTO> GetItemById(int id)
         {
             var item = _repository.GetItemById(id);

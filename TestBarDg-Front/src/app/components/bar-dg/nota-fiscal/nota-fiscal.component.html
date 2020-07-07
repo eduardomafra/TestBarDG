@@ -2,7 +2,7 @@
   <div class="col-md-2">
       <app-comanda-list></app-comanda-list>
   </div>
-  <div class="col-md-10">
+  <div *ngIf="comanda" class="col-md-10">
     <div *ngIf="!comanda.isClosed" class="alert alert-warning" role="alert">
       Não é possível exibir nota fiscal de uma comanda aberta
     </div>
@@ -16,7 +16,7 @@
         <!-- <div class="col-md-6 pull-left"><img src="" class="img-responsive"></div> -->
         <div class="col-md-12 text-right">
           <h5 class="pt-4">Comanda {{comanda.id}}</h5>
-          <p class="text-muted mb-0"><i>Due to: 4 Dec, 2019</i></p>
+          <p class="text-muted mb-0"><i>{{comanda.data | date:'dd/MM/yyyy HH:mm:ss'}}</i></p>
         </div>
       </div>
       <!-- <div class="row b-t pt-5">

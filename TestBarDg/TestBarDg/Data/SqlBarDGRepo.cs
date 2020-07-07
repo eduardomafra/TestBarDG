@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TestBarDg.Models;
+using TestBarDg.Utils;
 
 namespace TestBarDg.Data
 {
     public class SqlBarDGRepo : IBarDGRepo
     {
         private readonly BarDGContext _context;
+        private readonly IUtilsRepo _utils;
 
-        public SqlBarDGRepo(BarDGContext context)
+        public SqlBarDGRepo(BarDGContext context, IUtilsRepo utils)
         {
             _context = context;
+            _utils = utils;
         }
 
         public void DeletarItensComanda(ComandaItens comandaItens)
@@ -36,15 +39,46 @@ namespace TestBarDg.Data
 
         public IEnumerable<Comanda> GetAllComandas()
         {
+            if(_context.Comandas.ToList().Count == 0)
+            {
+                var comandas = _utils.getComandas();
+
+                foreach(Comanda comanda in comandas)
+                {
+                    inserirComanda(comanda);
+                }
+
+                saveChanges();
+
+            }
+
             return _context.Comandas.ToList();
         }
 
         public IEnumerable<Item> GetAllItens()
         {
+            if(_context.Itens.ToList().Count == 0)
+            {
+                return _utils.getItens();
+            }
+
             return _context.Itens.ToList();
         }
         public Comanda GetComandaById(int id)
         {
+            if (_context.Comandas.ToList().Count == 0)
+            {
+                var comandas = _utils.getComandas();
+
+                foreach (Comanda comanda in comandas)
+                {
+                    inserirComanda(comanda);
+                }
+
+                saveChanges();
+
+            }
+
             return _context.Comandas.FirstOrDefault(p => p.Id == id);
         }
 
@@ -60,6 +94,11 @@ namespace TestBarDg.Data
 
         public Item GetItemById(int id)
         {
+            if (_context.Itens.ToList().Count == 0)
+            {
+                return _utils.getItens().FirstOrDefault(p => p.Id == id);
+            }
+
             return _context.Itens.FirstOrDefault(p => p.Id == id);
         }
 

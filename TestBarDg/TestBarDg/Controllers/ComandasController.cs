@@ -33,8 +33,9 @@ namespace TestBarDg.Controllers
         /// <summary>
         /// Retorna todas as comandas.
         /// </summary>
-        /// <param name="id"></param>  
+        /// <response code="200">Retorna todas as comandas</response>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<ComandaReadDTO>> GetAllComandas()
         {
             var comandas = _repository.GetAllComandas();
@@ -45,13 +46,13 @@ namespace TestBarDg.Controllers
         /// <summary>
         /// Retorna uma comanda de acordo com o id.
         /// </summary>
-        // <returns>Uma comanda de acordo com o id</returns>
-        /// <param name="comandaCreateDto"></param>
-        /// <response code="201">Retorna a nova comanda criada</response>
-        /// <response code="400">Se a comanda for null</response>  
-        /// <param name="id"></param>  
-        /// 
+        /// <returns>Uma comanda de acordo com o id</returns>
+        /// <param name="id"></param>
+        /// <response code="200">Retorna a comanda referente ao id</response>
+        /// <response code="404">Se não existir uma comanda com o id requisitado</response>   
         [HttpGet("{id}", Name = "GetComandaById")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<ComandaReadDTO> GetComandaById(int id)
         {
             var comanda = _repository.GetComandaById(id);
@@ -67,7 +68,7 @@ namespace TestBarDg.Controllers
         /// <summary>
         /// Insere uma comanda.
         /// </summary>
-        /// /// <remarks>
+        /// <remarks>
         /// Modelo request:
         ///     
         ///     {
@@ -76,12 +77,9 @@ namespace TestBarDg.Controllers
         ///
         /// </remarks>
         /// <returns>Uma nova comanda criada</returns>
-        /// <param name="comandaCreateDto"></param>
-        /// <response code="201">Retorna a nova comanda criada</response>
-        /// <response code="400">Se a comanda for null</response>     
+        /// <response code="201">Retorna a nova comanda criada</response>  
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<ComandaReadDTO> inserirComanda(ComandaCreateDTO comandaCreateDto)
         {
             var comandaModel = _mapper.Map<Comanda>(comandaCreateDto);
@@ -97,8 +95,22 @@ namespace TestBarDg.Controllers
         /// <summary>
         /// Atualiza uma comanda específica.
         /// </summary>
-        /// <param name="id"></param>  
+        /// <remarks>
+        /// Modelo request:
+        ///     
+        ///     {
+        ///        "id": 1,
+        ///        "isClose": "true"
+        ///     }
+        ///
+        /// </remarks>
+        /// <returns>No content</returns>
+        /// <param name="comandaUpdateDTO"></param>  
+        /// <response code="204">Comanda atualizada com sucesso</response>
+        /// <response code="404">Se o id da comanda não existir</response>     
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult updateComanda(int id, ComandaUpdateDTO comandaUpdateDTO)
         {
             var comandaModelFromRepo = _repository.GetComandaById(id);
@@ -120,8 +132,13 @@ namespace TestBarDg.Controllers
         /// <summary>
         /// Fecha uma comanda específica e calcula o desconto.
         /// </summary>
+        /// <returns>No content</returns>
         /// <param name="id"></param>  
+        /// <response code="204">Comanda fechada com sucesso</response>
+        /// <response code="404">Se o id da comanda não existir</response>  
         [HttpPost("fechar/{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult FecharComanda(int id)
         {
             var comandaModelFromRepo = _repository.GetComandaById(id);
@@ -140,6 +157,7 @@ namespace TestBarDg.Controllers
             }
 
             comandaModelFromRepo.isClosed = true;
+            comandaModelFromRepo.data = DateTime.Now;
 
             return updateComanda(comandaModelFromRepo.Id, _mapper.Map<ComandaUpdateDTO>(comandaModelFromRepo));
         }
@@ -147,8 +165,13 @@ namespace TestBarDg.Controllers
         /// <summary>
         /// Reseta uma comanda específica.
         /// </summary>
+        /// <returns>No content</returns>
         /// <param name="id"></param>  
+        /// <response code="204">Comanda resetada com sucesso</response>
+        /// <response code="404">Se o id da comanda não existir ou se não houver itens na comanda</response>  
         [HttpPost("resetar/{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult ResetarComanda(int id)
         {
             var comandaModelFromRepo = _repository.GetComandaById(id);
@@ -183,48 +206,6 @@ namespace TestBarDg.Controllers
             _repository.InserirDesconto(descontoModel);
             _repository.saveChanges();
         }
-
-        //private IEnumerable<DescontoCreateDTO> getDesconto(IEnumerable<ComandaItens> comandaItensList)
-        //{
-        //    List<DescontoCreateDTO> desconto = new List<DescontoCreateDTO>();
-
-        //    var cerveja = comandaItensList.Where(w => w.nomeItem == "Cerveja").FirstOrDefault();
-        //    var conhaque = comandaItensList.Where(w => w.nomeItem == "Conhaque").FirstOrDefault();
-        //    var agua = comandaItensList.Where(w => w.nomeItem == "Água").FirstOrDefault();
-
-        //    if (cerveja != null)
-        //    {
-        //        var quantidadeCerveja = Convert.ToInt32(cerveja.Quantidade / 5);
-
-        //        if(quantidadeCerveja >= 1)
-        //        {
-        //            desconto.Add(new DescontoCreateDTO(cerveja.IdComanda, cerveja.IdItem, cerveja.nomeItem, quantidadeCerveja, quantidadeCerveja * cerveja.ValorUnitario));
-        //        }
-
-        //        if(conhaque != null)
-        //        {
-        //            if(agua != null)
-        //            {
-        //                quantidadeCerveja = Convert.ToInt32(cerveja.Quantidade / 2);
-        //                var quantidadeConhaque = Convert.ToInt32(conhaque.Quantidade / 3);
-
-        //                if (quantidadeCerveja >= 1 && quantidadeConhaque >= 1)
-        //                {
-        //                    if (quantidadeCerveja <= quantidadeConhaque)
-        //                    {
-        //                        var quantidade = quantidadeCerveja <= agua.Quantidade ? quantidadeCerveja : agua.Quantidade;
-        //                        desconto.Add(new DescontoCreateDTO(agua.IdComanda, agua.IdItem, agua.nomeItem, quantidade, quantidade * agua.ValorUnitario));
-        //                    } else
-        //                    {
-        //                        var quantidade = quantidadeConhaque <= agua.Quantidade ? quantidadeConhaque : agua.Quantidade;
-        //                        desconto.Add(new DescontoCreateDTO(agua.IdComanda, agua.IdItem, agua.nomeItem, quantidade, quantidade * agua.ValorUnitario));
-        //                    }
-        //                }
-        //            }                   
-        //        }
-        //    }
-        //    return desconto;
-        //}
 
     }
 }
